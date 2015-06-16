@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>学习React！~</title>
+</head>
+<body>
+<div id="app"></div>
+
+</body>
+<script src="bower_components/react/react.min.js"></script>
+<script src="bower_components/react/JSXTransformer.js"></script>
+<script type="text/jsx">
+
+    var MessageBox = React.createClass({
+        getInitialState: function () {
+            return {
+                titleMessage: '你好世界',
+                subMessage: [
+                    '我会代码搬砖',
+                    '以及花式搬砖',
+                    '不说了，工头叫我回去搬砖了。。。。。。。。'
+                ]
+            }
+        },
+        render: function () {
+            return (
+                    <div>
+                        <h1>{this.state.titleMessage}</h1>
+                        <SubMessage messages={this.state.subMessage}></SubMessage>
+                    </div>
+            );
+        }
+    });
+
+    var SubMessage = React.createClass({
+        getDefaultProps: function () {
+            return {
+                //当父级不传消息过来的时候默认显示
+                messages: ['默认的消息']
+            }
+        },
+        render: function () {
+            var msgs = [];
+            this.props.messages.forEach(function (msg) {
+                msgs.push(
+                        <p>码农说：{msg}</p>
+                );
+            });
+            return (
+                    <h3>{msgs}</h3>
+            );
+        }
+    });
+
+    React.render(<MessageBox/>,
+            document.getElementById('app'),
+            function () {
+                console.log('渲染完成');
+            });
+</script>
+</html>
