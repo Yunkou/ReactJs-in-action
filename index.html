@@ -11,14 +11,41 @@
 <script src="bower_components/react/react.min.js"></script>
 <script src="bower_components/react/JSXTransformer.js"></script>
 <script type="text/jsx">
+
     var MessageBox = React.createClass({
-        alertMe: function () {
-            alert('你刚才点了我一下！~~')
-        },
         render: function () {
-            return (<h1 onClick={this.alertMe}>你好世界！！！</h1>)
+            var SMessage = [];
+            for (var i = 0; i < 5; i++) {
+                SMessage.push(<SubMessage key={'SMessage' + i}></SubMessage>);
+            }
+            return (
+                    <div>
+                        <h1>你好世界！！！</h1>
+                        {SMessage}
+                    </div>
+            );
         }
     });
+
+    var SubMessage = React.createClass({
+        render: function () {
+            return (
+                    <div>
+                        <h3>写代码很有意思</h3>
+                        <Footer></Footer>
+                    </div>
+            );
+        }
+    });
+
+    var Footer = React.createClass({
+        render: function () {
+            return (
+                    <small>因为我们在用代码创造</small>
+            );
+        }
+    });
+    
     React.render(<MessageBox/>,
             document.getElementById('app'),
             function () {
