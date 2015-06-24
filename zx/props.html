@@ -11,17 +11,18 @@
 <script src="../bower_components/react/react.min.js"></script>
 <script src="../bower_components/react/JSXTransformer.js"></script>
 <script type="text/jsx">
+    var obj = {
+        titleMessage: '你好世界',
+        subMessage: [
+            '我会代码搬砖',
+            '以及花式搬砖',
+            '不说了，工头叫我回去搬砖了。。。。。。。。'
+        ]
+    };
 
     var MessageBox = React.createClass({
         getInitialState: function () {
-            return {
-                titleMessage: '你好世界',
-                subMessage: [
-                    '我会代码搬砖',
-                    '以及花式搬砖',
-                    '不说了，工头叫我回去搬砖了。。。。。。。。'
-                ]
-            }
+            return obj;
         },
         render: function () {
             return (

@@ -6,7 +6,7 @@
 </head>
 <body>
 <div id="app"></div>
-
+<label></label>
 </body>
 <script src="../bower_components/react/react.min.js"></script>
 <script src="../bower_components/react/JSXTransformer.js"></script>
@@ -17,116 +17,63 @@
                 inputValue: 'input value',
                 selectValue: 'A',
                 radioValue: 'B',
-                checkValues: [],
                 textareaValue: 'some text here,,,,,'
-            }
+            };
         },
         handleSubmit: function (e) {
             e.preventDefault();
-            var formData = {
-                input: this.refs.goodInput.getDOMNode().value,
-                select: this.refs.goodSelect.getDOMNode().value,
-                textarea: this.refs.goodTextarea.getDOMNode().value,
-                radio: this.state.radioValue,
-                check: this.state.checkValues
-            };
-
-            console.log('the form result is:');
-            console.log(formData);
-
-            this.refs.goodRadio.saySomething();
-
+            console.log(this.state);
         },
-        handleRadio: function (e) {
+        handleInput: function (e) {
             this.setState({
-                radioValue: e.target.value
-            })
+                inputValue: e.target.value
+            });
         },
-        handleCheck: function (e) {
-            var checkValues = this.state.checkValues.slice();
-            var newVal = e.target.value;
-            var index = checkValues.indexOf(newVal);
-            if (index == -1) {
-                checkValues.push(newVal)
-            } else {
-                checkValues.splice(index, 1);
-            }
-
+        handleSelect: function (e) {
             this.setState({
-                checkValues: checkValues
-            })
+                selectValue: e.target.value
+            });
         },
         render: function () {
             return (
                     <form onSubmit={this.handleSubmit}>
-                        <input ref="goodInput" type="text" defaultValue={this.state.inputValue }/>
-                        <br/>
-                        选项：
-                        <select defaultValue={ this.state.selectValue } ref="goodSelect">
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                            <option value="E">E</option>
-                        </select>
-                        <br/>
-                        <p>radio button!</p>
-                        <RadioButtons ref="goodRadio" handleRadio={this.handleRadio}/>
-                        <br/>
-
-                        <Checkboxes handleCheck={this.handleCheck}/>
-                        <br/>
-                        <textarea defaultValue={this.state.textareaValue} ref="goodTextarea"></textarea>
-                        <button type="submit">提交</button>
-
+                        <p>
+                            <input type="text" value={this.state.inputValue} onChange={this.handleInput}/>
+                        </p>
+                        <p>
+                            <select value={this.state.selectValue} onChange={this.handleSelect}>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                            </select>
+                        </p>
+                        <p>
+                            <input name="goodRadio" type="radio" value="A"/>
+                            <input name="goodRadio" type="radio" checked value="B"/>
+                            <input name="goodRadio" type="radio" value="c"/>
+                        </p>
+                        <p>
+                            <input name="goodRadio" type="checkbox" value="A"/>
+                            <input name="goodRadio" type="checkbox" value="B"/>
+                            <input name="goodRadio" type="checkbox" value="C" checked/>
+                        </p>
+                        <p>
+                            <textarea value={this.state.textareaValue}></textarea>
+                        </p>
+                        <p>
+                            <button type="submit">提交</button>
+                        </p>
                     </form>
-            )
+            );
         }
     });
 
-    var RadioButtons = React.createClass({
-        saySomething: function () {
-            alert("yo what's up man!");
-        },
-        render: function () {
-            return (
-                    <div>
-                        <lable>A
-                            <input onChange={this.props.handleRadio} name="goodRadio" type="radio" value="A"/>
-                        </lable>
-                        <lable>B
-                            <input onChange={this.props.handleRadio} name="goodRadio" type="radio"
-                                   defaultCheckedvalue="B"/>
-                        </lable>
-                        <lable>C
-                            <input onChange={this.props.handleRadio} name="goodRadio" type="radio" value="C"/>
-                        </lable>
-                    </div>
-            )
-        }
-    });
-
-    var Checkboxes = React.createClass({
-        render: function () {
-            return (
-                    <span>
-                        A
-                        <input onChange={this.props.handleCheck} name="goodCheckbox" type="checkbox" value="A"/>
-                        B
-                        <input onChange={this.props.handleCheck} name="goodCheckbox" type="checkbox" value="B"/>
-                        C
-                        <input onChange={this.props.handleCheck} name="goodCheckbox" type="checkbox" value="C"/>
-                    </span>
-            )
-        }
-    });
-
-
-    var formApp = React.render(
-            <FormApp />,
-            document.getElementById('app')
-    )
-
-
+    React.render(<FormApp/>,
+            document.getElementById('app'),
+            function () {
+                console.log('渲染完成');
+            });
 </script>
 </html>
