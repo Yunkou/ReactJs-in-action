@@ -23,25 +23,18 @@
         handleSubmit: function (e) {
             e.preventDefault();
             console.log(this.state);
-        },
-        handleInput: function (e) {
-            this.setState({
-                inputValue: e.target.value
-            });
-        },
-        handleSelect: function (e) {
-            this.setState({
-                selectValue: e.target.value
-            });
+            console.log(React.findDOMNode(this.refs['goodInput']).value);
+            console.log(React.findDOMNode(this.refs['goodSelect']).value);
+            console.log(React.findDOMNode(this.refs['goodTextarea']).value);
         },
         render: function () {
             return (
                     <form onSubmit={this.handleSubmit}>
                         <p>
-                            <input type="text" value={this.state.inputValue} onChange={this.handleInput}/>
+                            <input ref="goodInput" type="text" defaultValue={this.state.inputValue} />
                         </p>
                         <p>
-                            <select value={this.state.selectValue} onChange={this.handleSelect}>
+                            <select defaultValue={this.state.selectValue} ref="goodSelect">
                                 <option value="A">A</option>
                                 <option value="B">B</option>
                                 <option value="C">C</option>
@@ -60,7 +53,7 @@
                             <input name="goodRadio" type="checkbox" value="C" checked/>
                         </p>
                         <p>
-                            <textarea value={this.state.textareaValue}></textarea>
+                            <textarea defaultValue={this.state.textareaValue} ref="goodTextarea"></textarea>
                         </p>
                         <p>
                             <button type="submit">提交</button>
