@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+</head>
+<body>
+<script src="../bower_components/react/react.min.js"></script>
+<script src="../bower_components/react/JSXTransformer.js"></script>
+<script type="text/jsx">
+    var App = React.createClass({
+        render: function () {
+            return (
+                    <h1>Hello world</h1>
+            )
+        }
+    });
+    React.render(<App />, document.body, function () {
+        console.log('渲染完成');
+    });
+</script>
+</body>
+</html>
