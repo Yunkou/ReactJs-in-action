@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>7-accessing-child-properties</title>
+</head>
+<body>
+<script src="../bower_components/react/react.min.js"></script>
+<script src="../bower_components/react/JSXTransformer.js"></script>
+<script type="text/jsx">
+    var App = React.createClass({
+        render:function(){
+            return <Button>I <Heart /> React</Button>
+        }
+    });
+
+    var Button = React.createClass({
+        render:function(){
+            console.log(this.props.children);
+            return <button>{this.props.children}</button>
+        }
+    });
+
+    var Heart = React.createClass({
+        render:function(){
+            return <span>Love</span>
+        }
+    });
+
+    React.render(<App />, document.body);
+</script>
+</body>
+</html>
