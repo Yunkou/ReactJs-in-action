@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>10-component-lifecycle-updating</title>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <style>
+        textarea, pre {
+            height: 400px !important;
+        }
+    </style>
+</head>
+<body>
+<script src="../bower_components/react/react.js"></script>
+<script src="../bower_components/react/JSXTransformer.js"></script>
+<script type="text/jsx">
+    var Transformer = React.createClass({
+        getInitialState: function () {
+            return {
+                input: '/* add jsx here */',
+                output: '',
+                err: ''
+            }
+        },
+        update: function (e) {
+            var code = e.target.value;
+            try {
+                this.setState({
+                    output: JSXTransformer.transform(code).code,
+                    err: ''
+                })
+            }
+            catch (err) {
+                this.setState({
+                    err: err.message
+                })
+            }
+        },
+        render: function () {
+            return (
+                    <div>
+                        <div className="row">
+                            <p className="alert alert-danger">&nbsp;{this.state.err}</p>
+                        </div>
+                        <div className="row">
+                            <textarea defaultValue={this.state.input} className="col-sm-6 input-lg"
+                                      onChange={this.update}/>
+                            <pre className="col-sm-6 input-lg">{this.state.output}</pre>
+                        </div>
+                    </div>
+            )
+        }
+    });
+
+    React.render(<Transformer />, document.body);
+
+
+</script>
+</body>
+</html>
