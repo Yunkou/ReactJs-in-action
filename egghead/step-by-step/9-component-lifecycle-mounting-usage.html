@@ -2,11 +2,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>8-Component-Lifecycle-Mounting-Basics</title>
+    <title>9-component-lifecycle-mounting-usage</title>
 </head>
 <body>
-<script src="../bower_components/react/react.min.js"></script>
-<script src="../bower_components/react/JSXTransformer.js"></script>
+<script src="../../bower_components/react/react.min.js"></script>
+<script src="../../bower_components/react/JSXTransformer.js"></script>
 <script type="text/jsx">
     var Button = React.createClass({
         getInitialState:function(){
@@ -16,17 +16,17 @@
             this.setState({val: this.state.val+1});
         },
         componentWillMount:function(){
-            console.log('mounting');
+            this.setState({m:2})
         },
         render:function(){
             console.log('rendering');
-            return <button onClick={this.update}>{this.state.val}</button>
+            return <button onClick={this.update}>{this.state.val*this.state.m}</button>
         },
         componentDidMount:function(){
-            console.log('mounted');
+            this.inc = setInterval(this.update,500)
         },
         componentWillUnmount:function(){
-            console.log('bye!');
+            clearInterval(this.inc);
         }
     });
 
